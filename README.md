@@ -10,7 +10,7 @@ A collection of useful scripts for working on projects @ [School 42](https://en.
 
 2. `src-list`
 	* A shell script, recursively searching and printing a sorted list of `.c` files in a directory. Useful for pasting into Makefiles, since the [Norme](https://github.com/almayor/libft/blob/master/docs/subjects/norme.en.pdf) doesn't allow wildcards.
-	* `Usage: proto-list <directory>`
+	* `Usage: src-list <directory>`
 
 ---
 If you have any questions, please contact me on Github.
