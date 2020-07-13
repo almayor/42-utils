@@ -1,6 +1,6 @@
-##42-utils
+## 42-utils
 
-A collection of useful scripts for working on projects @ at [School 42](https://en.wikipedia.org/wiki/42_(school)).
+A collection of useful scripts for working on projects @ [School 42](https://en.wikipedia.org/wiki/42_(school)).
 
 ### Overview
 
