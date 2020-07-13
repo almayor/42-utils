@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+import os
+import re
+import sys
+
+from pathlib import Path
+
+"""
+Recursively finds and prints a sorted list of all non-static prototypes from
+a project written in C
+"""
+
+def get_prototypes(path):
+	regex = re.compile(r"^\w+\s+\**(\w+)\(")
+	brac = {'(': 1, ')': -1}
+	with open(path, 'r') as f:
+	
+		for line in f:
+			match = regex.match(line)
+			if match:
+				name = match.group(1)
+				nbrac = sum(brac.get(c, 0) for c in line)
+				line = ' '.join(line.split())
+				line = line.replace(' ', "\t", 1)
+				proto = line.strip()
+		
+				while nbrac:
+					line = f.readline()
+					nbrac += sum(brac.get(c, 0) for c in line)
+					proto += line.strip()
+				
+				proto += ";"
+				yield (name, proto)
+
+
+if __name__ == "__main__":
+	if len(sys.argv) != 2:
+		sys.exit(f"Usage: {os.path.basename(sys.argv[0])} <path>")
+
+	prototypes = dict()
+	for file in Path(sys.argv[1]).rglob('*.c'):
+		for name, proto in get_prototypes(file):
+			prototypes[name] = proto
+
+	for key in sorted(prototypes):
+		print (prototypes[key])
